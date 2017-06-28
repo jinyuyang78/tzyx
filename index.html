@@ -1,0 +1,458 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<title>影迷升级记</title>
+<link href="css/css.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery-1.7.2.min.js" language="javascript"></script> 
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script src="js/index.js"></script>
+
+	
+<script>
+<!--
+var sw=$(window).width();
+var sh=$(window).height();
+var b=640/960;
+if(sw/sh >b){
+	$("html").css("zoom",b*sh/640);
+}else{
+	var phoneScale = sw/640;
+	document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+}
+$(function(){
+	var ch=$(".touchslider").height();
+	$(".section").css("height",ch);
+
+	$('.btn_share').click(function(){
+		$('.mask2').show();
+		$('.share').show();
+		setTimeout(function(){$('.p5').addClass("active");},300);
+	});
+	$('.share').click(function(){
+		$('.mask2').hide();
+		$('.share').hide();
+		$('.p5').removeClass("active");
+	});
+	$('.btn_start').click(function(){
+		$('.mask2').show();
+		$('.first').hide();
+		$('.tip').show();
+		$('.exam').show();
+		setTimeout(function(){$('.p1').addClass("active");},300);
+	});
+	
+	var nCount=-1,nScore=0,nTimeNum=300,bOver=false;
+	var myAnswer='';
+	var rs=new Array();
+	var txt=new Array();
+	var tt=new Array();
+	tt[0]='快说！快说！快说！娘娘这是穿越了？';
+	tt[1]='明长官，您这么光明正大的说这句话，真的好吗？';
+	tt[2]='萌萌萌萌萌萌萌的那个圆滚滚滚到底是什么？';
+	tt[3]='师傅！你说什么？我听！不！见！';
+	tt[4]='who是最好的怪兽来着？';
+	tt[5]='这魔性的表情，芈月到底要说什么！！！';
+	tt[6]='鸡冻没？答对了我就让你跪舔！！！';
+	tt[7]='这是谁的杰作？';
+	tt[8]='在下……';
+	tt[9]='【骨灰级】他是谁？';
+	tt[10]='传说，这是最令人膜拜的职业';
+	tt[11]='这是哥哥出演的哪部影片？';
+	tt[12]='究竟是什么 总伤害小李子？';
+	tt[13]='《让子弹飞》中，张麻子去当县长的城是哪座城？';
+	tt[14]='博物馆守夜员拉里面对的雕塑是？';
+	tt[15]='看剧照，这是哪一部儿童电影呢~？';
+	tt[16]='志明与春娇中，杨千嬅所演角色的职业是~？';
+	tt[17]='包租婆的绝招是什么？ ';
+	tt[18]='范伟带的面具是哪个卡通人物嘞？';
+	tt[19]='小爱美丽在圣马丁运河上放生的金鱼叫什么名字？';
+	tt[20]='这个眼镜是谁的呢？';
+	tt[21]='这句经典台词出自哪部影片？';
+	tt[22]='此必备良药为何药嘞？';
+	tt[23]='图中有多少架战斗机？';
+	tt[24]='一张图，一部电影剧情';
+	tt[25]='一张图，一部电影剧情';
+	tt[26]='一张图，一部电影剧情';
+	tt[27]='图中展现的是超人的什么技能';
+	tt[28]='先帝赐予狄仁杰哪件绝世武器？';
+	tt[29]='发哥和贤哥的经典之作，吴镇宇作品';
+	tt[30]='是什么把美国大兵吓得屁滚尿流？';
+	tt[31]='小和尚在干嘛呢？';
+	tt[32]='林青霞饰演的三公主有一门绝技，叫？';
+	tt[33]='小八一直在等什么？';
+	tt[34]='王祖贤，好美。这是哪部电影？';
+		
+	rs[0]='恶棍天使';
+	rs[1]='太污了';
+	rs[2]='BB8';
+	rs[3]='打雷啦下雨收衣服啦';
+	rs[4]='毛怪苏利文';
+	rs[5]='朕有喜了';
+	rs[6]='五颗卤蛋';
+	rs[7]='剪刀手爱德华';
+	rs[8]='梅长苏';
+	rs[9]='煎饼侠';
+	rs[10]='摸金校尉';
+	rs[11]='霸王别姬';
+	rs[12]='奥斯卡';
+	rs[13]='鹅城';
+	rs[14]='思想者';
+	rs[15]='小淘气尼古拉';
+	rs[16]='化妆小姐';
+	rs[17]='狮吼功';
+	rs[18]='兔八哥';
+	rs[19]='抹香鲸';
+	rs[20]='哈利波特';
+	rs[21]='霸王别姬';
+	rs[22]='含笑半步癫';
+	rs[23]='09';
+	rs[24]='ET';
+	rs[25]='闪灵';
+	rs[26]='罗宾汉';
+	rs[27]='无敌金刚';
+	rs[28]='亢龙锏';
+	rs[29]='喋血双雄';
+	rs[30]='变形金刚';
+	rs[31]='破冰';
+	rs[32]='大海无量';
+	rs[33]='主人';
+	rs[34]='倩女幽魂';
+	
+	txt[0]='芈,少,大,福,使,天,花,传,分,幸,恶,年,棍,子,样,儿,天,手,师,像,打,一,超,月';
+	txt[1]='你,想,枪,长,服,者,蛋,污,太,开,明,伪,不,了,打,你,我,你,服,官,告,装,报,混';
+	txt[2]='R,3,B,灭,D,楚,P,爆,C,2,毁,里,者,巴,风,O,8,斯,格,弗,2,卡,兵,B';
+	txt[3]='饶,打,K,下,啊,收,Y,U,A,雷,命,啦,衣,我,雄,雨,I,啦,O,服,服,英,O,了';
+	txt[4]='坏,利,毛,怪,兰,道,利,尔,怪,蛋,眼,克,苏,格,莉,美,亨,大,文,麦,博,斯,雅,西';
+	txt[5]='皇,又,有,疯,服,孙,大,呢,不,朕,芈,上,喜,着,了,义,渠,了,憋,俪,月,饿,君,王';
+	txt[6]='我,五,蛋,时,吃,在,蛋,当,抓,滚,要,颗,瘤,间,肿,雨,卤,紧,活,吧,燥,起,来,下';
+	txt[7]='修,爱,大,叔,外,在,刀,星,的,机,要,剪,人,间,器,雨,手,紧,坪,吧,燥,刘,德,华';
+	txt[8]='林,宗,叛,哥,歌,帅,长,营,短,殊,靖,梅,小,羽,王,啊,少,逆,赤,胡,哥,犯,主,苏';
+	txt[9]='狼,万,蝠,猪,饼,铁,王,警,猪,煎,X,钢,镭,战,蜘,巨,射,蝙,金,磁,蛛,侠,人,眼';
+	txt[10]='盗,探,上,苍,摸,队,尉,花,宝,金,墓,寻,岸,国,龙,抗,家,彼,交,战,小,校,一,决';
+	txt[11]='东,阿,吸,毒,别,飞,姬,花,邪,王,花,寻,传,过,龙,喜,田,彼,正,战,小,霸,事,决';
+	txt[12]='莱,泰,习,莱,斯,飞,坦,话,坞,奥,昂,好,传,多,隆,克,纳,号,正,战,卡,霸,事,尼';
+	txt[13]='密,云,西,庆,城,飞,坦,花,坞,鸡,县,好,鸭,雁,龙,克,雄,号,鹅,战,卡,延,事,尼';
+	txt[14]='大,维,西,像,想,尿,坦,由,卫,女,县,者,鸭,纳,尿,自,雄,神,思,斯,小,孩,事,尼';
+	txt[15]='拉,天,涯,屁,小,尿,坦,入,古,孩,人,淘,尼,日,记,侵,闯,鬼,气,斯,小,孩,外,星';
+	txt[16]='作,服,涯,屁,化,公,演,员,生,家,务,妆,姐,司,记,者,闯,鬼,小,员,职,孩,外,星';
+	txt[17]='太,极,功,屁,拳,神,铁,员,狮,家,蛤,蟆,公,如,记,掌,来,鬼,吼,功,职,孩,外,头';
+	txt[18]='卡,叮,蓝,鸭,米,神,铁,鼠,猫,丘,蛤,蟆,猫,老,八,唐,比,鬼,白,功,兔,孩,外,哥';
+	txt[19]='折,抹,蓝,百,米,神,宝,宝,猫,戟,香,虎,鲸,老,八,唐,座,鬼,白,头,兔,鱼,外,哥';
+	txt[20]='南,特,蓝,白,侦,神,林,宝,猫,哈,范,名,利,探,志,唐,冰,柯,白,波,炫,冰,外,哥';
+	txt[21]='无,上,蓝,的,侦,王,林,事,十,海,霸,谈,姬,间,卖,故,日,柯,白,滩,兜,冰,道,别';
+	txt[22]='一,上,蓝,笑,侦,王,林,霜,十,鹤,含,日,顶,命,砒,故,日,步,半,丧,红,冰,癫,散';
+	txt[23]='1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,1,2,3,4,5,6';
+	txt[24]='飞,球,火,车,务,独,日,人,E,电,碟,外,话,星,战,援,自,大,行,救,任,立,T,天';
+	txt[25]='飞,灵,火,头,地,独,子,人,恐,电,闪,白,话,宫,花,援,房,大,雪,斧,任,立,怖,天';
+	txt[26]='盗,灵,笔,所,罗,诀,子,洋,寻,墓,加,白,龙,罗,汉,比,房,记,雪,宾,海,立,怖,勒';
+	txt[27]='光,射,眼,所,罗,无,子,敌,速,镭,运,动,超,金,刚,比,激,光,级,宾,海,跳,怖,跃';
+	txt[28]='唐,射,眼,龙,剑,无,大,势,速,亢,斩,见,甲,金,刚,比,激,光,级,锏,海,跳,十,五';
+	txt[29]='英,雄,眼,喋,命,色,无,势,悔,本,件,哈,甲,金,刚,击,激,雄,夺,锏,海,追,血,发';
+	txt[30]='外,雄,眼,巨,星,机,无,势,飞,霜,碟,形,船,金,刚,击,刚,人,变,绿,海,器,血,发';
+	txt[31]='摸,问,眼,题,命,子,无,玩,想,双,西,摘,甲,破,刚,击,法,东,夺,冰,果,追,血,呆';
+	txt[32]='如,经,眼,海,无,阳,无,掌,想,来,大,功,九,破,刚,击,量,神,夺,真,果,阴,血,呆';
+	txt[33]='好,饼,妈,海,妈,车,无,掌,玩,吃,主,火,干,公,刚,击,量,神,夺,交,人,阴,哒,呆';
+	txt[34]='笑,魂,就,女,西,年,无,妖,千,吃,倩,傲,城,公,刚,毒,量,幽,江,湖,东,阴,幽,邪';
+	var nAllNum=10;
+	var exam_arr=getArrayItems(rs,nAllNum);
+
+	function getArrayItems(arr, num) {
+		var temp_array = new Array();
+		for (var index in arr) {
+			temp_array.push(index);
+		}
+
+		var return_array = new Array();
+		for (var i = 0; i<num; i++) {
+			if (temp_array.length>0) {
+				var arrIndex = Math.floor(Math.random()*temp_array.length);
+				return_array[i] = temp_array[arrIndex];
+				temp_array.splice(arrIndex, 1);
+			} else {
+				break;
+			}
+		}
+		return return_array;
+	}
+		
+	var timer=setInterval(function(){
+		if(!bOver) return;
+		if(nTimeNum<1){
+			fail();
+		}else{
+			nTimeNum--;
+		}
+	},1000);
+	
+	$('.btn_close').click(function(){
+		$('.p1').removeClass("active");
+		setTimeout(function(){
+			$('.mask2').hide();
+			$('.tip').hide();
+			showExam();
+			bOver=true;
+			setTimeout(function(){$('.p2').addClass("active");},300);
+		},300);
+	});
+	
+	var nCur=0;
+	function showExam(){
+		nCount++;
+		nCur=0;
+		var t='';
+		for(var i=0;i<rs[exam_arr[nCount]].length;i++){
+			t+='<span></span>';
+		}
+		$('.answer').html(t);
+		$('.pic').html('<img src="images/' + (exam_arr[nCount]*1+1) + '.jpg">');
+		$('.tt').text(tt[exam_arr[nCount]]);
+		$('.txt').html('');
+		var a=txt[exam_arr[nCount]].split(',');
+		t='';
+		for(var i=0;i<a.length;i++){
+			t+='<span>' + a[i] + '</span>';
+		}
+		$('.txt').html(t);		
+	}
+	
+	$('.txt span').live('click',function(){
+		if(nCur<rs[exam_arr[nCount]].length){
+			myAnswer+=$(this).text();
+			$('.answer span').eq(nCur).text($(this).text());
+			nCur++;
+		}
+	});
+	
+	$('.reset').click(function(){
+		nCur=0;
+		myAnswer='';
+		$('.answer span').text('');
+	});
+	
+	$('.submit').click(function(){
+		if(myAnswer==rs[exam_arr[nCount]]){
+			nScore+=10;
+		}
+		myAnswer='';
+		if(nCount<nAllNum-1){
+			showExam();
+		}else{
+			showResult();
+		}
+	});
+	
+	function showResult(){
+		$('.mask2').hide();
+		$('.fail').hide();
+
+		var s='';
+		var t=nScore.toString().split('');
+		for (var k=0;k<t.length;k++){
+			s+='<span class="n' + t[k] + '"></span>';
+		}
+		$('.score').html(s);
+		$('.result .t4').removeClass('r0');
+		$('.result .t5').removeClass('r0');
+		$('.result .t4').removeClass('r1');
+		$('.result .t5').removeClass('r1');
+		$('.result .t4').removeClass('r2');
+		$('.result .t5').removeClass('r2');
+		$('.result .t4').removeClass('r3');
+		$('.result .t5').removeClass('r3');
+		
+		var r=0;
+		var tt="哎呦影渣~嘿嘿嘿,原来你小砸就是影渣!玩成这样还不快去娱玩加料!";
+		if(nScore>20 && nScore<51){
+			r=1;
+			tt="呵呵影屌~一首歌送给你,《LOSER》黑透理,关注娱玩让你逆袭!";
+		}else if(nScore>50 && nScore<81){
+			r=2;
+			tt="雾槽影霸~欧买嘎!传说中的影爸原来就是你,跪求加入娱玩影视社群!";
+		}else if(nScore>80){
+			r=3;
+			tt="我滴神呐~天哪噜!你对影娱的痴迷已经超神了,快让你的朋友圈为你癫狂吧!";
+		}
+		$('title').text(tt);
+		
+		$('.result .t4').addClass('r' + r);
+		$('.result .t5').addClass('r' + r);
+
+		bOver=false;
+		$('.exam').hide();
+		$('.result').show();
+		setTimeout(function(){$('.p4').addClass("active");},300);
+	}
+	
+	
+	
+	$('.btn_view').click(showResult);
+	$('.btn_again').click(function(){
+		$('.exam').show();
+		$('.result').hide();
+		myAnswer='';
+		nCur=0,nCount=-1,nScore=0,nTimeNum=300,bOver=true;
+		$('.active').removeClass("active");
+		exam_arr=getArrayItems(rs,nAllNum);
+		showExam();
+	});
+	
+	
+	function fail(){
+		bOver=false;
+		$('.mask2').show();
+		$('.fail').show();
+		setTimeout(function(){$('.p3').addClass("active");},300);
+	}
+	
+	$('<audio class="bgMuisc" loop="loop"><source src="music.mp3" type="audio/mpeg"></audio>').appendTo('body');
+	 var ms=$(".bgMuisc");
+	 ms[0].play();
+	var sta=1;
+	$(".music_btn").on("touchstart",function(e){
+		e = event.touches ? event.touches[0] : e;
+		if(sta==1){
+			sta=0;
+			$(".music_btn").removeClass("on");
+			ms[0].pause();
+		}else{
+			sta=1;
+			$(".music_btn").addClass("on");
+			ms[0].play();
+		}
+		e.stopPropagation();
+	});
+	
+	
+	
+});
+
+var loadImg = function(pics, callback){
+    var index = 0;
+    var len = pics.length;
+    var img = new Image();
+    var flag = false;
+    var progress = function(w){
+		$(".loading_wrap b").text(w);
+    }
+    var load = function(){
+        img.src = pics[index];
+        img.onload = function() {
+            progress(Math.floor(((index + 1) / len) * 100) + "%");
+            index ++ ;
+            if (index < len) {
+                load();
+            }else{
+                callback();
+            }
+        }
+        return img;
+    }
+    if(len > 0){
+        load();
+    }else{
+        progress("100%");
+    }
+    return {
+        pics: pics,
+        load: load,
+        progress: progress
+    };
+}
+var pics=new Array();
+pics = ['images/bg.jpg','images/bg_02.jpg','images/bg_03.jpg','images/t4.png'];
+for (var i=3;i<25;i++){
+	pics[i]='images/t' + (i-2) + '.png';
+}
+loadImg(pics, function(){
+    setTimeout(function(){
+       $(".mask").hide();
+	   $(".p0").addClass("active");
+    }, 500);
+});
+
+-->
+</script>
+
+</head>
+
+<body>
+ <div id='wx_pic' style='margin:0 auto;display:none;'>
+    <img src='images/logo.png' />
+</div>
+
+<div class="mask">
+  <div class="loading_wrap">
+  	<ul class="t1"></ul>
+    <ul class="t2"></ul>
+    <ul class="t3"></ul>
+    <ul class="t4"></ul>
+    <ul class="t5"></ul>
+    <ul class="t5" style="margin-left:-5px;"></ul>
+    <ul class="t6"> 片库载入中… <b>0%</b></ul>
+  </div>
+</div>
+
+<div class="touchslider">
+
+	<div class="touchslider-item first" style="display:block">
+		<div class="p0 section"> 
+        	<div class="pr t1 flash"></div>
+            <div class="pr t6 flash"></div>
+            <div class="pr t2 flash"><a href="javascript:;" class="btn_start"></a></div>
+            <div class="pr t3 flash"></div>
+            <div class="pr t4 flash"></div>
+            <div class="pr t5 flash slow"></div>
+        </div>
+    </div>
+
+	<div class="touchslider-item exam" style="z-index:11">
+		<div class="p2 section"> 
+        	<div class="pr t1"></div>
+            <div class="pr tt"></div>
+            <div class="pr pic"></div>
+            <div class="pr answer"></div>
+            <div class="pr txt"></div>
+        	<div class="pr btn"><a href="javascript:;" class="reset"></a><a href="javascript:;" class="submit"></a></div>
+        </div>
+    </div>
+
+	<div class="touchslider-item tip">
+		<div class="p1 section"> 
+        	<div class="pr t1 flash"><a href="javascript:;" class="btn_close"></a></div>
+        </div>
+    </div>  
+
+	<div class="touchslider-item result" style="z-index:98;">
+		<div class="p4 section"> 
+        	<div class="pr t1"><p><img src="images/ewm.jpg"></p></div>
+            <div class="pr t3 score"></div>
+            <div class="pr t4 flash"></div>
+            <div class="pr t5 flash"></div>
+            <div class="pr t2"><a href="javascript:;" class="btn_share"></a><a href="javascript:;" class="btn_again"></a></div>
+        </div>
+    </div>
+    
+    <div class="touchslider-item share">
+		<div class="p5 section"> 
+        	<div class="pr t1 flash"></div>
+        </div>
+    </div>
+    
+	<div class="touchslider-item fail">
+		<div class="p3 section"> 
+        	<div class="pr t1 flash"><a href="javascript:;" class="btn_view"></a></div>
+        </div>
+    </div>
+           
+</div>
+
+<div class="mask2"></div>
+<div class="music_btn on"></div>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257193296'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257193296' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>
